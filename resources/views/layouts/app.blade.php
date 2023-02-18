@@ -19,7 +19,23 @@
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
-       
+            <div class="py-1 rounded-none">
+                <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 bg-white border-b border-gray-200 space-x-10">
+                            <a href="{{ route('users.index') }}">Users</a>
+
+                            <a href="{{ route('clients.index')}}">Clients</a>
+                            <a href="{{ route('users.show',Auth()->user()) }}">Projects</a>
+                            <a href="{{ route('users.show',Auth()->user()) }}">Task</a>
+                            
+                            <a href="{{ route('users.show',Auth()->user()) }}">Profile</a>
+                     
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
           
 
             <!-- Page Content -->

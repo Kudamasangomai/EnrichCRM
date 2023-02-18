@@ -1,7 +1,12 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RolesController;
+use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
@@ -21,7 +26,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth','verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 /*
 |--------------------------------------------------------------------------
@@ -35,11 +40,10 @@ Route::get('/dashboard', function () {
 link send to their email
 
 */
-Route::get('/email/verify', function () {  
-
+Route::get('/email/verify', function () {
     return view('auth.verify-email');
-
-})->middleware('auth')->name('verification.notice');
+})
+    ->middleware('auth')->name('verification.notice');
 
 
 /*
@@ -48,14 +52,14 @@ The EmailVerificationRequest is a form request that is included with Laravel
  hash parameters.
 */
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill(); 
+    $request->fulfill();
     return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 // Resending The Verification Email
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
- 
+
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
@@ -64,4 +68,15 @@ Route::post('/email/verification-notification', function (Request $request) {
 | End Email Verification Routes
 |--------------------------------------------------------------------------
 */
-require __DIR__.'/auth.php';
+
+Route::resource('users', UserController::class);
+Route::resource('clients', ClientsController::class);
+Route::resource('roles', RolesController::class);
+
+// Route::group(['middleware' => ['auth']], function() {
+//     Route::resource('roles', RoleController::class);
+//     Route::resource('users', UserController::class);
+//     Route::resource('products', ProductController::class);
+// });
+
+require __DIR__ . '/auth.php';
