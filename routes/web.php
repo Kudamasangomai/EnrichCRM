@@ -72,7 +72,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::resource('users', UserController::class);
 Route::resource('clients', ClientsController::class);
 Route::resource('roles', RolesController::class);
-
+Route::get('/users/{id}/show_user_roles/',[UserController::class,'show_user_roles'])->name('show_user_roles');
 // Route::group(['middleware' => ['auth']], function() {
 //     Route::resource('roles', RoleController::class);
 //     Route::resource('users', UserController::class);

@@ -6,15 +6,22 @@
                 <div class="pull-left">
                     <h2>Create New User</h2>
                 </div>
+                <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
+                    @csrf
                 <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+                    <a class="0 inline-flex  text-white
+                    items-start justify-start 
+                    px-6 py-3 bg-blue-700 hover:bg-blue-600 focus:outline-none rounded" href="{{ route('users.index') }}"> Back</a>
+
+                    <button type="submit" class="text-white px-6 py-3 bg-green-500 rounded">Submit</button>
                 </div>
+
+                
             </div>
         </div>
        
         {{-- {!! Form::open(array('route' => 'users.store','method'=>'POST')) !!} --}}
-        <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
-            @csrf
+        
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
@@ -25,7 +32,9 @@
                             {{-- {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'rounded-md text-black p-1 w-full mb-4 bg-gray-100')) !!} --}}
 
                         @error('name')
-                        <p class="bg-red-400 mb-1 rounded-sm p-2 text-white"> {{ $message }}</p>
+                        <x-form_error_message>
+                            {{ $message }}
+                             </x-form_error_message>
                         @enderror
                     </div>
                 </div>
@@ -75,8 +84,8 @@
                      
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="col-xs-12 col-sm-12 col-md-12 text-rignt">
+         
                 </div>
             </div>
         </form>

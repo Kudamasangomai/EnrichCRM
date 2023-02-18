@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserRoleUpdateRequest;
 
 class UserController extends Controller
 {
@@ -48,7 +50,7 @@ class UserController extends Controller
         $input['password'] = Hash::make($input['password']);    
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
-        dd($user);
+        // dd($user);
         return redirect('/users');
 
      
@@ -57,6 +59,13 @@ class UserController extends Controller
       
     }
 
+
+    public function show_user_roles($id)
+    {
+        $user = User::find($id);
+        return view('user.user_roles',compact('user'));
+
+    }
     /**
      * Display the specified resource.
      * Displays profile for logged in user
@@ -78,7 +87,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $roles = Role::pluck('name','name')->all();
+        $userRole = $user->roles->pluck('name','name')->all();
+        return view('user.user-edit',compact('user','roles','userRole'));
     }
 
     /**
@@ -88,9 +100,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRoleUpdateRequest $request, $id)
     {
-        //
+       
+      
+         $input = $request->all();  
+         $user = User::find($id);
+         $user->update($input);
+         // deletes the roles which the user has
+         DB::table('model_has_roles')->where('model_id',$id)->delete();
+         // Then assign new roles from the form
+         $user->assignRole($request->input('roles'));
+         return redirect('/users')->with('success',$user->name .' Profile Updated');
     }
 
     /**
