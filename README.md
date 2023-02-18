@@ -14,7 +14,7 @@ A simple CRM  Systems for managing clients na taks
 ## Features and Concepts
 <ul>
 <li> Authentication : email verification </li>
-<li> Authorization : Spatie Permossions package ,Gates and Policies </li>
+<li> Authorization : Spatie Permissions package ,Gates and Policies </li>
 <li> Email : mailable and Mail facade </li>
 <li> Db : Soft Deletes , eloquent Query Scopes ,seeder and factories </li>
 
