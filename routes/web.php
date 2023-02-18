@@ -42,8 +42,7 @@ link send to their email
 */
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
-})
-    ->middleware('auth')->name('verification.notice');
+})->middleware('auth')->name('verification.notice');
 
 
 /*
@@ -68,15 +67,12 @@ Route::post('/email/verification-notification', function (Request $request) {
 | End Email Verification Routes
 |--------------------------------------------------------------------------
 */
-
+Route::group(['middleware' => ['auth']], function() {
 Route::resource('users', UserController::class);
 Route::resource('clients', ClientsController::class);
 Route::resource('roles', RolesController::class);
 Route::get('/users/{id}/show_user_roles/',[UserController::class,'show_user_roles'])->name('show_user_roles');
-// Route::group(['middleware' => ['auth']], function() {
-//     Route::resource('roles', RoleController::class);
-//     Route::resource('users', UserController::class);
-//     Route::resource('products', ProductController::class);
-// });
+
+});
 
 require __DIR__ . '/auth.php';
