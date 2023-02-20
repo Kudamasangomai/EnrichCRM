@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserRoleUpdateRequest;
@@ -87,10 +88,18 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        $roles = Role::pluck('name','name')->all();
-        $userRole = $user->roles->pluck('name','name')->all();
-        return view('user.user-edit',compact('user','roles','userRole'));
+       
+         if(Auth::user()->hasPermissionTo('manage users'))
+        {
+            $user = User::find($id);
+            $roles = Role::pluck('name','name')->all();
+            $userRole = $user->roles->pluck('name','name')->all();
+            return view('user.user-edit',compact('user','roles','userRole'));
+        }else{
+            abort(404);
+        }
+
+        
     }
 
     /**

@@ -23,14 +23,14 @@
                         @include('layouts.messages')
                     </div>
 
-                    @can('manage users')
+                    {{-- @can('manage users') --}}
                     <button onclick="popuphandler(true)" class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex 
                         items-start justify-start 
                         px-6 py-3 bg-blue-500 hover:bg-blue-600 focus:outline-none rounded">
                         <p class="text-sm font-medium leading-none text-white"><a href="{{ route('users.create') }}">
                                 Add User</a></p>
                     </button>
-                    @endcan
+                    {{-- @endcan --}}
                 </div>
                 <div class="mt-7 overflow-x-auto">
                     <table class="w-full whitespace-nowrap">
@@ -83,7 +83,9 @@
                                     items-start justify-start 
                                     px-3 py-1 bg-green-500" href="{{ route('show_user_roles',$user->id) }}"> View</a>
 
-
+                                    @can('delete users')
+                                        
+                                   
                                     <a class="0 inline-flex  text-white
                                     items-start justify-start 
                                     px-3 py-1 bg-yellow-500 focus:outline-none rounded"
@@ -94,7 +96,7 @@
                                     items-start justify-start 
                                     px-3 py-1 bg-red-500 h focus:outline-none rounded"
                                         href="{{ route('users.index') }}"> Delete</a>
-
+                                        @endcan
                                 </td>
 
                                 {{-- <td class="pl-5">
