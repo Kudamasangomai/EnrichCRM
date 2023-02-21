@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Clients;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ClientsController extends Controller
 {
@@ -26,7 +28,17 @@ class ClientsController extends Controller
      */
     public function create()
     {
-        //
+        $response = Gate::inspect('manage_clients');
+        if(Gate::allows('manage_clients',Auth()->user()))
+        {
+            return view('clients.create-clients');
+        }else
+        {
+           $msg = $response->message();
+            return view('alerts.no-rights',compact('msg'));
+        }
+        
+        
     }
 
     /**
@@ -48,7 +60,9 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-        //
+        $client = Clients::find($id);
+        return view('clients.client',compact('client'));
+        
     }
 
     /**
@@ -59,7 +73,14 @@ class ClientsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = Clients::find($id);
+        if(Auth()->user()->cannot('edit',$client))
+        {
+            $msg = 'Your Have no rights to access this page';
+            return view('alerts.no-rights',compact('msg'));
+        }else{
+            dd('Edit page openned');
+        }
     }
 
     /**

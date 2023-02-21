@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use App\Http\Requests\RoleformRequest;
 
 class RolesController extends Controller
 {
@@ -13,7 +15,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::pluck('name','name')->all(); 
+        return view('Roles.Roles-list',compact('roles'));
     }
 
     /**
@@ -32,9 +35,14 @@ class RolesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleformRequest $request)
     {
-        //
+        $role = new Role();
+        $role->name = $request->input('name');
+        $role->guard_name = $request->input('guard_name');
+        $role->save();
+        // Role::create($request->validated());
+        return redirect('/roles');
     }
 
     /**

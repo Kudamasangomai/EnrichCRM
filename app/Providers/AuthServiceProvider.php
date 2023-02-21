@@ -2,8 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Models\Clients;
+use App\Models\User;
+use App\Policies\ClientsPolicy;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
+        Clients::class => ClientsPolicy::class,
     ];
 
     /**
@@ -25,6 +31,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+
+        Gate::define('manage_clients',function(User $user){
+            /** if($user->is_admin == 1){
+            *    return true;
+            * }
+            * return false;
+            */ 
+            return $user->is_admin
+                ?Response::allow()
+                :Response::deny('You Dont have Rights to access this page');
+        });
     }
 }
