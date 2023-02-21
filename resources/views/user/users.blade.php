@@ -18,20 +18,29 @@
                 </div>
             </div>
             <div class="bg-white py-4 md:py-7 px-2 md:px-8 xl:px-10">
-                <div class="sm:flex items-center justify-between">
-                    <div class="flex items-center">
-                        @include('layouts.messages')
-                    </div>
 
-                    {{-- @can('manage users') --}}
-                    <button onclick="popuphandler(true)" class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex 
-                        items-start justify-start 
-                        px-6 py-3 bg-blue-500 hover:bg-blue-600 focus:outline-none rounded">
+                <div class="sm:flex items-center justify-between">
+                    @can('manage_clients')
+                    <button onclick="popuphandler(true)"
+                        class="focus:ring-2 focus:ring-offset-2 
+                            focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-blue-500 focus:outline-none rounded">
+                        <p class="text-sm font-medium leading-none text-white">
                         <p class="text-sm font-medium leading-none text-white"><a href="{{ route('users.create') }}">
                                 Add User</a></p>
+                        </p>
                     </button>
-                    {{-- @endcan --}}
+                    @endcan
+
+                    Using Laravel spatie Authorization On USer Model
                 </div>
+
+
+
+
+
+
+
+
                 <div class="mt-7 overflow-x-auto">
                     <table class="w-full whitespace-nowrap">
                         <tbody>
@@ -84,8 +93,8 @@
                                     px-3 py-1 bg-green-500" href="{{ route('show_user_roles',$user->id) }}"> View</a>
 
                                     @can('delete users')
-                                        
-                                   
+
+
                                     <a class="0 inline-flex  text-white
                                     items-start justify-start 
                                     px-3 py-1 bg-yellow-500 focus:outline-none rounded"
@@ -96,18 +105,8 @@
                                     items-start justify-start 
                                     px-3 py-1 bg-red-500 h focus:outline-none rounded"
                                         href="{{ route('users.index') }}"> Delete</a>
-                                        @endcan
+                                    @endcan
                                 </td>
-
-                                {{-- <td class="pl-5">
-                                    <button
-                                        class="py-3 px-3 text-sm focus:outline-none leading-none text-red-700 bg-red-100 rounded">Due
-                                        today at 18:00</button>
-                                </td>
-                                <td class="pl-4">
-                                    <button
-                                        class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">View</button>
-                                </td> --}}
 
                             </tr>
                             @endforeach

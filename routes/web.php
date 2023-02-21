@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\permissionscontroller;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -71,6 +72,7 @@ Route::group(['middleware' => ['auth']], function() {
 Route::resource('users', UserController::class);
 Route::resource('clients', ClientsController::class);
 Route::resource('roles', RolesController::class);
+Route::resource('permissions', permissionscontroller::class);
 Route::get('/users/{id}/show_user_roles/',[UserController::class,'show_user_roles'])->name('show_user_roles');
 
 });

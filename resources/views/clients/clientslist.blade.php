@@ -17,7 +17,7 @@
 
                 </div>
             </div>
-            <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
+            <div class="bg-white py-4 md:py-2 px-4 md:px-8 xl:px-10">
                 <div class="sm:flex items-center justify-between">
                     @can('manage_clients')
                     <button onclick="popuphandler(true)"
@@ -30,6 +30,8 @@
                         </p>
                     </button>
                     @endcan
+
+                    Using Laravel Gates and Policies for authorization On clients Model
                 </div>
                 <div class="mt-7 overflow-x-auto">
                     <table class="w-full whitespace-nowrap">

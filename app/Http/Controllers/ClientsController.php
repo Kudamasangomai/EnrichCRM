@@ -79,7 +79,8 @@ class ClientsController extends Controller
             $msg = 'Your Have no rights to access this page';
             return view('alerts.no-rights',compact('msg'));
         }else{
-            dd('Edit page openned');
+          
+           return view('clients.edit-client',compact('client'));
         }
     }
 

@@ -27,9 +27,13 @@
 
                             <a href="{{ route('clients.index')}}">Clients</a>
                             <a href="{{ route('users.show',Auth()->user()) }}">Projects</a>
-                            <a href="{{ route('users.show',Auth()->user()) }}">Task</a>
-                            <a href="{{ route('roles.index') }}">Roles</a>
+                            {{-- <a href="{{ route('users.show',Auth()->user()) }}">Task</a> --}}
+                            @can('manage_roles')
+                                
                             
+                            <a href="{{ route('roles.index') }}">Roles</a>
+                            <a href="{{ route('permissions.index') }}">Permission</a>
+                            @endcan
                             <a href="{{ route('users.show',Auth()->user()) }}">Profile</a>
                      
                             

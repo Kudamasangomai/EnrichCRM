@@ -42,5 +42,12 @@ class AuthServiceProvider extends ServiceProvider
                 ?Response::allow()
                 :Response::deny('You Dont have Rights to access this page');
         });
+
+
+        Gate::define('manage_roles',function(User $user){
+            return $user->is_admin
+            ?Response::allow()
+            :Response::deny('You Dont have Rights to access this page');
+        });
     }
 }
