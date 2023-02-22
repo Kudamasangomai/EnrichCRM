@@ -18,13 +18,13 @@
     
         {!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
         <div >
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="">
                 <div class="form-group">
                     <strong>Name:</strong><br/>
                     {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'p-1 rounded-sm')) !!}
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="">
                 <div class="form-group">
                     <strong class="py-2">Permission:</strong>
                     <br/>
@@ -40,7 +40,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-left">
+            <div class=" text-left">
                 <button type="submit" class="bg-green-400 mt-2 px-2 rounded-sm">Submit</button>
             </div>
         </div>

@@ -12,7 +12,7 @@ use Spatie\Permission\Models\Permission;
 class RolesController extends Controller
 {
     /**
-     * Display a listing of the All roles .
+     * Display a listing of the All roles.
      *
      * @return \Illuminate\Http\Response
      */

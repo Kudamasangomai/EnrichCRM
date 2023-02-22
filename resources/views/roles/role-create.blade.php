@@ -45,6 +45,7 @@
                     <button type="submit" class="p-1 px-2 mt-2 bg-green-500 rounded-sm text-white">Add Role</button>
                 </div>
             </div>
+            {!! Form::close() !!}
    
     </x-active>
 </x-app-layout>
