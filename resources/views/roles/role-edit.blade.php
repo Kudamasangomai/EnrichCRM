@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-active>
         <div class="pull-right mt-2">
-            <a class="p-1 px-3 rounded-sm bg-blue-500 text-white hover:bg-blue-700" href="{{ route('roles.index') }}">
+            <a class="p-1 px-3 rounded-sm  bg-blue-500 text-white hover:bg-blue-700" href="{{ route('roles.index') }}">
                 Back</a>
               
                 

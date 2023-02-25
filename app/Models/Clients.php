@@ -7,10 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Clients extends Model
 {
-    protected $fillable = [
-        'contact_name', 'contact_email', 'contact_phone_number','company_name',
-        'company_address','company_city','company_vat',
-    ];
 
     use HasFactory;
+    protected $fillable = [
+        'contact_name',
+        'contact_email',
+        'contact_phone_number',
+        'company_name',
+        'company_address',
+        'company_city',
+        'company_vat',
+    ];
+
+
+
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

@@ -30,6 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -37,5 +38,13 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'integer',
     ];
+
+    
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }
