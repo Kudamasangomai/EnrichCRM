@@ -15,8 +15,13 @@ class Project extends Model
         'description',
         'user_id',
         'client_id',
-        'deadline',
+        'duedate',
         'status'
+    ];
+
+    protected $casts = [
+        'duedate' => 'datetime',
+        // 'created_at' => 'y/m/d',
     ];
     public const STATUS = ['open', 'inprogress', 'cancelled', 'completed'];
     

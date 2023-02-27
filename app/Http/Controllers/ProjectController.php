@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\User;
+use App\Models\Clients;
 use App\Models\Project;
-use app\Models\Clients;
-use finfo;
 use Illuminate\Http\Request;
+use App\Http\Requests\projectformrequest;
 
 class ProjectController extends Controller
 {
@@ -27,7 +29,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        // $project = Project::with('user','client');
+        $users = User::where('is_admin',1)->get();
+        $clients = Clients::all();
+        return view('projects.create-project',compact('clients','users'));
     }
 
     /**
@@ -36,9 +41,18 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(projectformrequest $request)
     {
         //
+     
+        $project = project::create($request->validated());
+       
+        return redirect('/projects')->with('success','Role created successfully');
+
+
+        
+     
+    
     }
 
     /**
@@ -63,7 +77,9 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project = Project::with('user','client')->find($id);
+        $users = User::where('is_admin',1)->get();
+        return view('projects.edit-project',compact('project','users'));
     }
 
     /**
@@ -75,7 +91,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -86,6 +102,9 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project = Project::find($id);
+        $project->delete();
+        return redirect('/projects')->with('success','Project deleted successfully');
+
     }
 }

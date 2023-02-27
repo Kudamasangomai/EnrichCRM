@@ -4,7 +4,7 @@
     <div class="">
     
     
-        <div class="pull-right">
+        <div class="pull-right mt-2">
                        
              {{ $slot }}
 
