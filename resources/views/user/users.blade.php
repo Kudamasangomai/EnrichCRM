@@ -31,7 +31,7 @@
                     </button>
                     @endcan
 
-                    Using Laravel spatie Authorization On USer Model
+                    Using Laravel spatie Authorization On User Model
                 </div>
 
 
@@ -92,7 +92,7 @@
                                     items-start justify-start 
                                     px-3 py-1 bg-green-500" href="{{ route('show_user_roles',$user->id) }}"> View</a>
 
-                                    @can('delete users')
+                              
 
 
                                     <a class="0 inline-flex  text-white
@@ -105,7 +105,7 @@
                                     items-start justify-start 
                                     px-3 py-1 bg-red-500 h focus:outline-none rounded"
                                         href="{{ route('users.index') }}"> Delete</a>
-                                    @endcan
+                                 
                                 </td>
 
                             </tr>

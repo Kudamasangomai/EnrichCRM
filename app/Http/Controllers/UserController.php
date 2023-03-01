@@ -88,7 +88,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-       
+       //Spatie Permissions Used Here
          if(Auth::user()->hasPermissionTo('manage users'))
         {
             $user = User::find($id);

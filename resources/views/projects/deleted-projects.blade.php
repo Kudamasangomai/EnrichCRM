@@ -2,26 +2,17 @@
     <x-active>
 
         <div class="sm:px-6 w-full flex-row">
-           
-                <x-page-title>
-                    <p tabindex="0"
-                        class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
-                        Projects</p>
-                </x-page-title>
+
+            <x-page-title>
+                <p tabindex="0"
+                    class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
+                    Deleted Projects</p>
+            </x-page-title>
         </div>
 
-        <x-back-div>
-            <a class="text-sm font-medium my-2 px-2 py-2 rounded-sm bg-blue-500 hover:bg-blue-700 text-white"
-                      href="{{ route('projects.create') }}">
-                      Create project</a>
-                      <a class="text-sm font-medium my-2 px-2 py-2 rounded-sm bg-gray-500 hover:bg-gray-700 text-white"
-                      href="{{ route('projects-deleted') }}">
-                     Deleted projects</a>
-                      
 
-          </x-back-div>
 
-          @include('layouts.messages')
+
         <x-active-page-content>
             <table class="w-full whitespace-nowrap">
                 <tbody>
@@ -100,33 +91,35 @@
                             px-3 py-1 mr-1 bg-green-500" href="{{ route('projects.show',$project->id) }}"> View</a>
 
                             @can('manage projects')
-
-
-                            <a class="0 inline-flex  text-white
+                            <form action="{{ route('restore-project',$project->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <button class="0 inline-flex  text-white rounded
                             items-start justify-start 
-                            px-3 py-1 mr-1 bg-yellow-500 focus:outline-none rounded"
-                                href="{{ route('projects.edit',$project->id) }}"> Edit</a>
+                            px-3 py-1 mr-1 bg-blue-500" > Restore</button>
+                            </form>
 
-                                <form action="{{ route('projects.destroy',$project->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                       
-                            <button class="0 inline-flex  text-white
-                            items-start justify-start 
+
+                            <form action="{{ route('projects.destroy',$project->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+
+                                <button class="0 inline-flex  text-white
+                            items-start justify-start  
                             px-3 py-1 bg-red-500 h focus:outline-none rounded" href="">
-                                Delete</button>
+                                    Remove</button>
                             </form>
                             @endcan
                         </td>
 
                     </tr>
                     @endforeach
-               
+
 
                 </tbody>
             </table>
             <div class="p-3 mt-2 bg-gray-200">
-            {{ $projects->links() }}
+                {{ $projects->links() }}
             </div>
         </x-active-page-content>
     </x-active>

@@ -8,6 +8,8 @@ use App\Models\Clients;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Requests\projectformrequest;
+use App\Http\Requests\ProjectupdateformRequest;
+use SebastianBergmann\CodeCoverage\Driver\Selector;
 
 class ProjectController extends Controller
 {
@@ -79,7 +81,12 @@ class ProjectController extends Controller
     {
         $project = Project::with('user','client')->find($id);
         $users = User::where('is_admin',1)->get();
-        return view('projects.edit-project',compact('project','users'));
+        $clients = Clients::get();
+        // $selecteduser = Project::where('id',$id)
+        //                         ->where('user_id',$project->user->id)
+        //                         ->get();
+        // dd($selecteduser);
+        return view('projects.edit-project',compact('project','users','clients'));
     }
 
     /**
@@ -89,9 +96,11 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProjectupdateformRequest $request, Project $project)
     {
-        dd($request);
+        // dd($request);
+        $project->update($request->validated());
+        return redirect('/projects')->with('success','Project Updated successfully');
     }
 
     /**
@@ -106,5 +115,21 @@ class ProjectController extends Controller
         $project->delete();
         return redirect('/projects')->with('success','Project deleted successfully');
 
+    }
+
+    // Shows All deleted projects
+    public function deleted_projects(Project $project)
+    {
+       $projects = Project::onlyTrashed()->paginate(10);
+       return view('projects.deleted-projects',compact('projects'));
+    }
+
+    public function restore_project($id){
+
+        $project = Project::onlyTrashed()->where('id',$id)->get();
+        $project->restore();
+        // return redirect('/projects')->with('success','Project Restores successfully');
+       
+        return redirect()->route('projects.show',[ $project->id ])->with('success','Project Restored Successfully');
     }
 }

@@ -70,13 +70,17 @@ Route::post('/email/verification-notification', function (Request $request) {
 |--------------------------------------------------------------------------
 */
 Route::group(['middleware' => ['auth']], function() {
+
 Route::resource('users', UserController::class);
 Route::resource('projects', ProjectController::class);
 Route::resource('roles', RolesController::class);
 Route::resource('clients', ClientsController::class);
 Route::resource('permissions', permissionscontroller::class);
-Route::get('/users/{id}/show_user_roles/',[UserController::class,'show_user_roles'])->name('show_user_roles');
 
+
+Route::get('/users/{id}/show_user_roles/',[UserController::class,'show_user_roles'])->name('show_user_roles');
+Route::get('/deleted_projects',[ProjectController::class,'deleted_projects'])->name('projects-deleted');
+Route::put('projects/{id}/restore_project',[ProjectController::class,'restore_project'])->name('restore-project');
 });
 
 require __DIR__ . '/auth.php';
