@@ -126,10 +126,17 @@ class ProjectController extends Controller
 
     public function restore_project($id){
 
-        $project = Project::onlyTrashed()->where('id',$id)->get();
-        $project->restore();
-        // return redirect('/projects')->with('success','Project Restores successfully');
-       
+        $project = Project::withTrashed()->find($id);
+        $project->restore();       
         return redirect()->route('projects.show',[ $project->id ])->with('success','Project Restored Successfully');
+    }
+
+    public function remove_project($id){
+
+        $project = Project::onlyTrashed()->find($id);
+        $project->forceDelete();
+        return redirect()->route('projects-deleted')->with('success','Project Permanently Removed');
+       
+        
     }
 }

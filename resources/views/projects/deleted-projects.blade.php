@@ -26,9 +26,12 @@
 
                         <th> Status</th>
                         <th> Due Date</th>
-                        <th> Created @</th>
+                        <th> Deleted @</th>
                     </tr>
-                    @foreach ($projects as $project)
+                    @forelse  ($projects as $project)
+                        
+                  
+                    
                     <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
                         <td>
                             <div class="ml-5">
@@ -80,15 +83,15 @@
                         <td class="pl-5">
                             <div class="flex items-center">
 
-                                <p class="text-sm leading-none text-gray-600 mr-2">{{ $project->created_at
+                                <p class="text-sm leading-none text-gray-600 mr-2">{{ $project->deleted_at
                                     }}</p>
                             </div>
                         </td>
 
                         <td class="flex flex-row">
-                            <a class="0 inline-flex  text-white rounded
+                            {{-- <a class="0 inline-flex  text-white rounded
                             items-start justify-start 
-                            px-3 py-1 mr-1 bg-green-500" href="{{ route('projects.show',$project->id) }}"> View</a>
+                            px-3 py-1 mr-1 bg-green-500" href="{{ route('projects.show',$project->id) }}"> View</a> --}}
 
                             @can('manage projects')
                             <form action="{{ route('restore-project',$project->id) }}" method="POST">
@@ -100,7 +103,7 @@
                             </form>
 
 
-                            <form action="{{ route('projects.destroy',$project->id) }}" method="POST">
+                            <form action="{{ route('remove-project',$project->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
 
@@ -113,7 +116,9 @@
                         </td>
 
                     </tr>
-                    @endforeach
+                    @empty
+                        <p class="text-xl font-bold">Projects Recyle bin Empty</p>
+                    @endforelse
 
 
                 </tbody>

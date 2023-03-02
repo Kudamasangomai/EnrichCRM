@@ -81,6 +81,7 @@ Route::resource('permissions', permissionscontroller::class);
 Route::get('/users/{id}/show_user_roles/',[UserController::class,'show_user_roles'])->name('show_user_roles');
 Route::get('/deleted_projects',[ProjectController::class,'deleted_projects'])->name('projects-deleted');
 Route::put('projects/{id}/restore_project',[ProjectController::class,'restore_project'])->name('restore-project');
+Route::delete('projects/{id}/remove_project',[ProjectController::class,'remove_project'])->name('remove-project');
 });
 
 require __DIR__ . '/auth.php';
