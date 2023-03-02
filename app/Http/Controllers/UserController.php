@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserRoleUpdateRequest;
+use PhpParser\Node\Stmt\TryCatch;
 
 class UserController extends Controller
 {
@@ -60,7 +61,7 @@ class UserController extends Controller
       
     }
 
-
+//  Displays roles or profile  for slected in user
     public function show_user_roles($id)
     {
         $user = User::find($id);
@@ -129,8 +130,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        try {
+            $user->delete();
+
+        } catch (\Exception $e) {
+          
+            // return $e->getMessage();
+            return redirect()->back()->with('error', 
+            ' Cannot delete User Because ' . $user->name . 
+            ' is Assigned to a Project');
+        }     
+        return redirect('/users')->with('success','User Deleted');   
     }
 }

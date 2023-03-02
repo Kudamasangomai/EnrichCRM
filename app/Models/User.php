@@ -37,11 +37,17 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'is_admin' => 'integer',
+        'email_verified_at' => 'date',
+          'is_admin' => 'boolean',
+
     ];
 
-    
+    // An accessor transforms an Eloquent attribute value when it is accessed
+    //    i.e you show how you want this to be viewin the blade e.g upper or lower case 
+    public function getnameAttribute($value)
+    {
+        return Ucfirst($value);
+    }
 
     public function projects()
     {

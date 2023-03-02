@@ -1,11 +1,6 @@
 <x-app-layout>
     <x-active>
 
-
-
-
-
-
         <!-- component -->
         <div class="sm:px-6 w-full">
             <!--- more free and premium Tailwind CSS components at https://tailwinduikit.com/ --->
@@ -16,6 +11,7 @@
                         Clients</p>
 
                 </div>
+                @include('layouts.messages')
             </div>
             <div class="bg-white py-4 md:py-2 px-4 md:px-8 xl:px-10">
                 <div class="sm:flex items-center justify-between">
@@ -131,25 +127,30 @@
 
 
 
-                                <td>
+                                <td class="flex flex-row">
                                     <a class="0 inline-flex  text-white rounded
                                     items-start justify-start 
-                                    px-3 py-1 bg-green-500" href="{{ route('clients.show',$client->id) }}"> View</a>
+                                    px-3 py-1 mr-1 bg-green-500" href="{{ route('clients.show',$client->id) }}">
+                                        View</a>
 
 
 
 
                                     <a class="0 inline-flex  text-white
                                     items-start justify-start 
-                                    px-3 py-1 bg-yellow-500 focus:outline-none rounded"
+                                    px-3 py-1 mr-1 bg-yellow-500 focus:outline-none rounded"
                                         href="{{ route('clients.edit',$client) }}"> Edit</a>
 
                                     @can('manage_clients')
 
-
-                                    <a class="0 inline-flex  text-white
+                                    <form action="{{ route('clients.destroy',$client) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="0 inline-flex  text-white
                                     items-start justify-start 
-                                    px-3 py-1 bg-red-500 h focus:outline-none rounded" href="#"> Delete</a>
+                                    px-3 py-1 bg-red-500 h focus:outline-none rounded"> Delete
+                                        </button>
+                                    </form>
                                     @endcan
                                 </td>
                             </tr>

@@ -16,7 +16,7 @@ class ClientsController extends Controller
      */
     public function index()
     {
-       $clients = Clients::paginate(5);
+       $clients = Clients::paginate(50);
        return view('clients.clientslist',compact('clients'));
 
     }
@@ -102,8 +102,15 @@ class ClientsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Clients $client)
+    {  
+
+        try {
+            $client->delete();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 
+            ' Cannot delete Client Because is Assigned to a Project');
+        }
+        return redirect('/clients')->with('success','Client Deleted');
     }
 }

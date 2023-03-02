@@ -120,7 +120,7 @@ class ProjectController extends Controller
     // Shows All deleted projects
     public function deleted_projects(Project $project)
     {
-       $projects = Project::onlyTrashed()->paginate(10);
+       $projects = Project::onlyTrashed()->paginate(50);
        return view('projects.deleted-projects',compact('projects'));
     }
 

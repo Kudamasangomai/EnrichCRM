@@ -16,8 +16,9 @@
                         Users</p>
 
                 </div>
+               @include('layouts.messages')
             </div>
-            <div class="bg-white py-4 md:py-7 px-2 md:px-8 xl:px-10">
+            <div class="bg-white py-2 md:py-3 px-2 md:px-8 xl:px-10">
 
                 <div class="sm:flex items-center justify-between">
                     @can('manage_clients')
@@ -47,8 +48,10 @@
 
                             <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
                                 <th>
+                                    Is Admin?
                                 </th>
                                 <th> Name</th>
+
                                 <th> Email</th>
                                 <th> Verified @</th>
 
@@ -61,7 +64,7 @@
                                         <div
                                             class="bg-gray-200 rounded-sm w-5 h-5 flex flex-shrink-0 justify-center items-center relative">
 
-                                            E
+                                          {{$user->is_admin}}
                                         </div>
                                     </div>
                                 </td>
@@ -87,25 +90,28 @@
                                 </td>
 
 
-                                <td>
+                                <td class="flex flex-row">
                                     <a class="0 inline-flex  text-white rounded
                                     items-start justify-start 
-                                    px-3 py-1 bg-green-500" href="{{ route('show_user_roles',$user->id) }}"> View</a>
+                                    px-3 py-1 mr-1 bg-green-500" href="{{ route('show_user_roles',$user->id) }}"> View</a>
 
                               
 
 
                                     <a class="0 inline-flex  text-white
-                                    items-start justify-start 
+                                    items-start mr-1 justify-start 
                                     px-3 py-1 bg-yellow-500 focus:outline-none rounded"
                                         href="{{ route('users.edit',$user->id) }}"> Edit</a>
 
 
-                                    <a class="0 inline-flex  text-white
+                                        <form action="{{ route('users.destroy',$user) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                    <button class="0 inline-flex  text-white
                                     items-start justify-start 
                                     px-3 py-1 bg-red-500 h focus:outline-none rounded"
-                                        href="{{ route('users.index') }}"> Delete</a>
-                                 
+                                        > Delete</button>
+                                        </form>
                                 </td>
 
                             </tr>
