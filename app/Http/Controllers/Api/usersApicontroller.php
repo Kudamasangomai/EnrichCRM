@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Clients;
 use Illuminate\Http\Request;
 
-class clientscontroller extends Controller
+class userscontroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class clientscontroller extends Controller
      */
     public function index()
     {
-        return Clients::get();
+        //
     }
 
     /**
@@ -37,7 +36,7 @@ class clientscontroller extends Controller
      */
     public function show($id)
     {
-        return Clients::find($id);
+        //
     }
 
     /**
@@ -60,6 +59,6 @@ class clientscontroller extends Controller
      */
     public function destroy($id)
     {
-
+        //
     }
 }

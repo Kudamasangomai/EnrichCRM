@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\clientscontroller;
+use App\Http\Controllers\Api\ClientsApisController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('/clients',clientscontroller::class);
+Route::resource('/clientsapi',ClientsApisController::class);
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
