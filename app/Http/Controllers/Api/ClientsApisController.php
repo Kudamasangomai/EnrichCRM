@@ -8,6 +8,12 @@ use App\Http\Controllers\Controller;
 
 class ClientsApisController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum', ['except' => ['index', 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,7 @@ class ClientsApisController extends Controller
      */
     public function index()
     {
-        return Clients::orderby('contact_email','asc')->get();
+        return Clients::get();
     }
 
     /**
@@ -73,5 +79,9 @@ class ClientsApisController extends Controller
     public function destroy($id)
     {
         return Clients::destroy($id);
+    }
+
+    public function search_client($company_name){
+        return Clients::where('company_name' ,'Like', '%' .$company_name . '%')->get();
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\ClientsApisController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthApiController;
+use App\Http\Controllers\Api\ClientsApisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('/clientsapi',ClientsApisController::class);
+Route::post('/auth/register', [AuthApiController::class, 'create_user']);
+Route::post('/auth/login', [AuthApiController::class, 'login_user']);
+Route::post('/auth/logout', [AuthApiController::class, 'logout'])->name('logout');
+Route::get('/clientsapi/search_client/{name}',[ClientsApisController::class,'search_client']);
+
+
+
+Route::group(['middleware' => ['auth:sanctum']], function() {
+
+    Route::resource('/clientsapi',ClientsApisController::class);
+    
+   
+});
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
