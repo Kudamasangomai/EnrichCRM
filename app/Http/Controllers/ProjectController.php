@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Events\ProjectAssigned;
 use App\Models\User;
 use App\Models\Clients;
 use App\Models\Project;
@@ -43,11 +43,12 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(projectformrequest $request)
+    public function store(projectformrequest $request,User $user ,Project $project)
     {
         //
      
         $project = project::create($request->validated());
+        event(new ProjectAssigned($user ,$project));
        
         return redirect('/projects')->with('success','Role created successfully');
 

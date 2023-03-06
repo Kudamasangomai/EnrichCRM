@@ -53,7 +53,7 @@ class ClientsPolicy
 
     public function edit(User $user,clients $clients)
     {
-        if($user->is_admin === 1)
+        if($user->is_admin === true)
         {
             return true;
         }

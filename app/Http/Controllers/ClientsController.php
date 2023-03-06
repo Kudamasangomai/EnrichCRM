@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Clients;
 use Illuminate\Http\Request;
+use App\Events\Clientdeleted;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -106,10 +107,14 @@ class ClientsController extends Controller
     {  
 
         try {
+            event(new Clientdeleted($client));
             $client->delete();
+            
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 
-            ' Cannot delete Client Because is Assigned to a Project');
+            // return redirect()->back()->with('error', 
+            // ' Cannot delete Client Because is Assigned to a Project');
+        
+            return $e->getMessage();
         }
         return redirect('/clients')->with('success','Client Deleted');
     }
