@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ProjectAssigned extends Mailable
+class ProjectAssignedEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,7 +28,9 @@ class ProjectAssigned extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.projectassigned')
-                    ->subject('Project Assigned To you');;
+        return $this->markdown('mail.projectAssignedmail')
+                    ->subject('New Email Form Enrich');;
+
+    
     }
 }

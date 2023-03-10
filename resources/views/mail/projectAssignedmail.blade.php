@@ -1,12 +1,10 @@
 @component('mail::message')
-# Hello {{$user->name}},
+# Introduction
 
-You were assigned a Project {{ $project->client }} To run.
-<br>
-{{$project->title }} added you as teacher.
+The body of your message.
 
 @component('mail::button', ['url' => ''])
-View
+Button Text
 @endcomponent
 
 Thanks,<br>

@@ -18,7 +18,7 @@ use App\Http\Controllers\Api\ClientsApisController;
 
 Route::post('/auth/register', [AuthApiController::class, 'create_user']);
 Route::post('/auth/login', [AuthApiController::class, 'login_user']);
-Route::post('/auth/logout', [AuthApiController::class, 'logout'])->name('logout');
+// Route::post('/auth/logout', [AuthApiController::class, 'logout'])->name('logout');
 Route::get('/clientsapi/search_client/{name}',[ClientsApisController::class,'search_client']);
 
 

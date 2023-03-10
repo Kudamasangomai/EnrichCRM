@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Clients;
 use Illuminate\Http\Request;
 use App\Events\Clientdeleted;
+use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -17,9 +18,8 @@ class ClientsController extends Controller
      */
     public function index()
     {
-       $clients = Clients::paginate(50);
-       return view('clients.clientslist',compact('clients'));
-
+        $clients = Clients::paginate(50);
+        return view('clients.clientslist', compact('clients'));
     }
 
     /**
@@ -30,16 +30,12 @@ class ClientsController extends Controller
     public function create()
     {
         $response = Gate::inspect('manage_clients');
-        if(Gate::allows('manage_clients',Auth()->user()))
-        {
+        if (Gate::allows('manage_clients', Auth()->user())) {
             return view('clients.create-clients');
-        }else
-        {
-           $msg = $response->message();
-            return view('alerts.no-rights',compact('msg'));
+        } else {
+            $msg = $response->message();
+            return view('alerts.no-rights', compact('msg'));
         }
-        
-        
     }
 
     /**
@@ -62,8 +58,7 @@ class ClientsController extends Controller
     public function show($id)
     {
         $client = Clients::find($id);
-        return view('clients.client',compact('client'));
-        
+        return view('clients.client', compact('client'));
     }
 
     /**
@@ -75,13 +70,12 @@ class ClientsController extends Controller
     public function edit($id)
     {
         $client = Clients::find($id);
-        if(Auth()->user()->cannot('edit',$client))
-        {
+        if (Auth()->user()->cannot('edit', $client)) {
             $msg = 'Your Have no rights to access this page';
-            return view('alerts.no-rights',compact('msg'));
-        }else{
-          
-           return view('clients.edit-client',compact('client'));
+            return view('alerts.no-rights', compact('msg'));
+        } else {
+
+            return view('clients.edit-client', compact('client'));
         }
     }
 
@@ -104,18 +98,18 @@ class ClientsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Clients $client)
-    {  
-
+    {
         try {
             event(new Clientdeleted($client));
             $client->delete();
-            
         } catch (\Exception $e) {
-            // return redirect()->back()->with('error', 
-            // ' Cannot delete Client Because is Assigned to a Project');
-        
-            return $e->getMessage();
+
+            // return $e->getMessage();
+            return redirect()->back()->with(
+                'error',
+                ' Cannot delete Client Because  is Assigned to a Project'
+            );
         }
-        return redirect('/clients')->with('success','Client Deleted');
+        return redirect('/clients')->with('success', 'Client Deleted');
     }
 }

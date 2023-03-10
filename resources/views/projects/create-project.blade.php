@@ -16,11 +16,7 @@
       
  
         </div>
-        @if($errors)
-        <div class="invalid-feedback">
-            {{ $errors }}
-        </div>
-    @endif
+   
      
         <x-active-page-content>
 

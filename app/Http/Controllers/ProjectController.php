@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\ProjectAssigned;
 use App\Models\User;
 use App\Models\Clients;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Events\ProjectAssigned;
+use App\Events\ProjectAssignedEvent;
 use App\Http\Requests\projectformrequest;
 use App\Http\Requests\ProjectupdateformRequest;
 use SebastianBergmann\CodeCoverage\Driver\Selector;
@@ -45,11 +46,11 @@ class ProjectController extends Controller
      */
     public function store(projectformrequest $request,User $user ,Project $project)
     {
-        //
-     
+        $user = User::find($request->user_id);
         $project = project::create($request->validated());
-        event(new ProjectAssigned($user ,$project));
-       
+        event(new ProjectAssignedEvent($user->email));
+        
+        
         return redirect('/projects')->with('success','Role created successfully');
 
 
