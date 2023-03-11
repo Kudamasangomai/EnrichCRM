@@ -49,6 +49,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return Ucfirst($value);
     }
+//   laravel scopes helps make the code shorter and avoiding writting the same code many times
+
+    public function scopeAdmin($query)
+    {
+        return $query->where('is_admin',true);
+    }
 
     public function projects()
     {

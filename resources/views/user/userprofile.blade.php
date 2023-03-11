@@ -11,7 +11,7 @@
 </ul>
       
  
-    
+    {{  $usercount }}
       
     </x-active>
 
