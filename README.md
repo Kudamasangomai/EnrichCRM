@@ -8,8 +8,8 @@ A simple CRM  Systems for managing clients and projects
 <ul>
 <li> Authentication : email verification </li>
 <li> Authorization : Spatie Permissions package ,Gates and Policies </li>
-<li> Email : mailable and Mail facade </li>
-<li> Db : Soft Deletes , eloquent Query Scopes,Eloquent Accessors and Mutators ,seeder and factories </li>
+<li> Email : mailable class  With Events and Listeners </li>
+<li> Db : Soft Deletes , eloquent Query Scopes,Eloquent Accessors and Mutators ,seeders and factories </li>
 <li> API : API Basic (Routes and Controllers),Auth with Sanctum </li>
 <li> Traits : Traits Basic (Upload and Update User Image) </li>
 
