@@ -19,7 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','image',
     ];
 
     /**
@@ -44,7 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     // An accessor transforms an Eloquent attribute value when it is accessed
-    //    i.e you show how you want this to be viewin the blade e.g upper or lower case 
+    //    i.e you show how you want this to be view in the blade e.g upper or lower case 
     public function getnameAttribute($value)
     {
         return Ucfirst($value);

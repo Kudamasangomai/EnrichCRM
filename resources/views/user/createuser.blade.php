@@ -84,8 +84,9 @@
                      
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 text-rignt">
-         
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <p class=" text-3xl font-bold">Image </p>
+                    <input type="file" class=" rounded-md text-black p-1 w-full mb-4 bg-gray-100" name="image">
                 </div>
             </div>
         </form>

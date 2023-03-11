@@ -14,7 +14,7 @@
                     <p tabindex="0"
                         class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
                         Users</p>
-
+                        @include('layouts.messages')
                 </div>
                @include('layouts.messages')
             </div>
@@ -50,11 +50,12 @@
                                 <th>
                                     Is Admin?
                                 </th>
+                                <th> Image </th>
                                 <th> Name</th>
 
                                 <th> Email</th>
                                 <th> Verified @</th>
-
+                              
                                 <th> Action </th>
                             </tr>
                             @foreach ($users as $user)
@@ -64,8 +65,24 @@
                                         <div
                                             class="bg-gray-200 rounded-sm w-5 h-5 flex flex-shrink-0 justify-center items-center relative">
 
-                                          {{$user->is_admin}}
+                                            @if ( $user->is_admin == 1 )
+                                            {
+                                                Yes
+                                            }
+                                            @else{
+
+                                           NO
+                                            }                                                
+                                            @endif
+                                          
                                         </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="flex items-center pl-5">
+                                        <img src="/storage/{{$user->image}}"
+                                        class="flex-shrink-0 rounded-lg w-20 h-20 object-fit object-center sm:mb-0 mb-4" alt="..." />
+
                                     </div>
                                 </td>
                                 <td class="">

@@ -11,9 +11,11 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserRoleUpdateRequest;
 use PhpParser\Node\Stmt\TryCatch;
+use App\Traits\imagetrait;
 
 class UserController extends Controller
 {
+    use imagetrait;
     /**
      * Display a listing of the resource.
      * Displays a list of all users
@@ -47,8 +49,10 @@ class UserController extends Controller
     public function store(UserStoreRequest $request)
     {
    
-        $request->validated();        
+        $request->validated();
+        // dd($request->all())  ;
         $input = $request->all();
+        $input['image'] = $this->uploadimage($request, 'image', 'uploads');
         $input['password'] = Hash::make($input['password']);    
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
