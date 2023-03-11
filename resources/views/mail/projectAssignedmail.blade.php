@@ -1,10 +1,11 @@
 @component('mail::message')
-# Introduction
+Hi {{ $user->name }}
 
-The body of your message.
+project {{ $project->title }} of {{ $project->client->company_name  }}Has been
+assigned To you
 
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => route('projects.show',$project->id)])
+View Project
 @endcomponent
 
 Thanks,<br>

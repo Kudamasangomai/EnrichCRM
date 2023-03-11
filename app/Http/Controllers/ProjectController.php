@@ -48,10 +48,10 @@ class ProjectController extends Controller
     {
         $user = User::find($request->user_id);
         $project = project::create($request->validated());
-        event(new ProjectAssignedEvent($user->email));
+        event(new ProjectAssignedEvent($user,$project));
         
         
-        return redirect('/projects')->with('success','Role created successfully');
+        return redirect('/projects')->with('success','Project created successfully');
 
 
         

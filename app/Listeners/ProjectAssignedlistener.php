@@ -4,12 +4,15 @@ namespace App\Listeners;
 
 use App\Mail\ProjectAssignedEmail;
 use App\Events\ProjectAssignedEvent;
+use App\Models\Project;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ProjectAssignedlistener
 {
+   
     /**
      * Create the event listener.
      *
@@ -17,7 +20,7 @@ class ProjectAssignedlistener
      */
     public function __construct()
     {
-        //
+        
     }
 
     /**
@@ -28,6 +31,6 @@ class ProjectAssignedlistener
      */
     public function handle(ProjectAssignedEvent $event)
     {
-        Mail::to($event->email)->send(new ProjectAssignedEmail());
+        Mail::to($event->user->email)->send(new ProjectAssignedEmail($event->user, $event->project));
     }
 }
