@@ -7,25 +7,24 @@
 
 
         <!-- component -->
-        <div class="sm:px-6 w-full">
+        <div class="w-full sm:px-6">
             <!--- more free and premium Tailwind CSS components at https://tailwinduikit.com/ --->
-            <div class="px-4 md:px-10 py-4 md:py-7">
+            <div class="px-4 py-4 md:px-10 md:py-7">
                 <div class="flex items-center justify-between">
                     <p tabindex="0"
-                        class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
+                        class="text-base font-bold leading-normal text-gray-800 focus:outline-none sm:text-lg md:text-xl lg:text-2xl">
                         Users <br/>
-                        user who are admins  -{{  $usercount }}</p>
+                        User Who Are Admins  -{{  $usercount }}</p>
                         @include('layouts.messages')
                 </div>
                @include('layouts.messages')
             </div>
-            <div class="bg-white py-2 md:py-3 px-2 md:px-8 xl:px-10">
+            <div class="px-2 py-2 bg-white md:py-3 md:px-8 xl:px-10">
 
-                <div class="sm:flex items-center justify-between">
+                <div class="items-center justify-between sm:flex">
                     @can('manage_clients')
                     <button onclick="popuphandler(true)"
-                        class="focus:ring-2 focus:ring-offset-2 
-                            focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-blue-500 focus:outline-none rounded">
+                        class="inline-flex items-start justify-start px-6 py-3 mt-4 bg-blue-500 rounded focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 sm:mt-0 focus:outline-none">
                         <p class="text-sm font-medium leading-none text-white">
                         <p class="text-sm font-medium leading-none text-white"><a href="{{ route('users.create') }}">
                                 Add User</a></p>
@@ -43,11 +42,11 @@
 
 
 
-                <div class="mt-7 overflow-x-auto">
+                <div class="overflow-x-auto mt-7">
                     <table class="w-full whitespace-nowrap">
                         <tbody>
 
-                            <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
+                            <tr tabindex="0" class="h-16 border border-gray-100 rounded focus:outline-none">
                                 <th>
                                     Is Admin?
                                 </th>
@@ -60,11 +59,11 @@
                                 <th> Action </th>
                             </tr>
                             @foreach ($users as $user)
-                            <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
+                            <tr tabindex="0" class="h-16 border border-gray-100 rounded focus:outline-none">
                                 <td>
                                     <div class="ml-5">
                                         <div
-                                            class="bg-gray-200 rounded-sm w-5 h-5 flex flex-shrink-0 justify-center items-center relative">
+                                            class="relative flex items-center justify-center flex-shrink-0 w-5 h-5 bg-gray-200 rounded-sm">
 
                                             @if ( $user->is_admin == 1 )
                                             {
@@ -82,13 +81,13 @@
                                 <td class="">
                                     <div class="flex items-center pl-5">
                                         <img src="/storage/{{$user->image}}"
-                                        class="flex-shrink-0 rounded-lg w-20 h-20 object-fit object-center sm:mb-0 mb-4" alt="..." />
+                                        class="flex-shrink-0 object-center w-20 h-20 mb-4 rounded-lg object-fit sm:mb-0" alt="..." />
 
                                     </div>
                                 </td>
                                 <td class="">
                                     <div class="flex items-center pl-5">
-                                        <p class="text-base font-medium leading-none text-gray-700 mr-2">{{ $user->name
+                                        <p class="mr-2 text-base font-medium leading-none text-gray-700">{{ $user->name
                                             }}</p>
 
                                     </div>
@@ -96,38 +95,32 @@
                                 <td class="pl-24">
                                     <div class="flex items-center">
 
-                                        <p class="text-sm leading-none text-gray-600 ml-2">{{ $user->email }}</p>
+                                        <p class="ml-2 text-sm leading-none text-gray-600">{{ $user->email }}</p>
                                     </div>
                                 </td>
                                 <td class="pl-5">
                                     <div class="flex items-center">
 
-                                        <p class="text-sm leading-none text-gray-600 ml-2">{{ $user->email_verified_at
+                                        <p class="ml-2 text-sm leading-none text-gray-600">{{ $user->email_verified_at
                                             }}</p>
                                     </div>
                                 </td>
 
 
                                 <td class="flex flex-row">
-                                    <a class="0 inline-flex  text-white rounded
-                                    items-start justify-start 
-                                    px-3 py-1 mr-1 bg-green-500" href="{{ route('show_user_roles',$user->id) }}"> View</a>
+                                    <a class="inline-flex items-start justify-start px-3 py-1 mr-1 text-white bg-green-500 rounded 0" href="{{ route('show_user_roles',$user->id) }}"> View</a>
 
                               
 
 
-                                    <a class="0 inline-flex  text-white
-                                    items-start mr-1 justify-start 
-                                    px-3 py-1 bg-yellow-500 focus:outline-none rounded"
+                                    <a class="inline-flex items-start justify-start px-3 py-1 mr-1 text-white bg-yellow-500 rounded 0 focus:outline-none"
                                         href="{{ route('users.edit',$user->id) }}"> Edit</a>
 
 
                                         <form action="{{ route('users.destroy',$user) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                    <button class="0 inline-flex  text-white
-                                    items-start justify-start 
-                                    px-3 py-1 bg-red-500 h focus:outline-none rounded"
+                                    <button class="inline-flex items-start justify-start px-3 py-1 text-white bg-red-500 rounded 0 h focus:outline-none"
                                         > Delete</button>
                                         </form>
                                 </td>
